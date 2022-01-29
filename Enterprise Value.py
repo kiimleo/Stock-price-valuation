@@ -1,4 +1,4 @@
-# 기업가치 (기업의 적정 시가총액과 적정 주가 산정)
+### 기업가치 (기업의 적정 시가총액과 적정 주가 산정)
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup  # HTML을 파싱하는 모듈
@@ -11,6 +11,7 @@ code = input('기업 코드명을 입력하세요 : ')
 
 url = 'https://comp.fnguide.com/SVO2/ASP/SVD_Main.asp?pGB=1&gicode=' + code + \
       '&cID=&MenuYn=Y&ReportGB=&NewMenuID=101&stkGb=701'  # fnguide - 기업정보 - Snapshot
+
 fr_page = requests.get(url)  # url 주소 가져와서 변수에 저장
 fr_tables = pd.read_html(fr_page.text)  # 여러 테이블 가져오기
 temp_df = fr_tables[10]  # Financial Highlight 표에 도착! (10번째 테이블 가져오기)
@@ -18,7 +19,7 @@ temp_df = temp_df.set_index(temp_df.columns[0])  # 표의 첫째 열을 인덱�
 temp_df = temp_df.loc['지배주주지분']  # 표에서 지배주주지분 행 데이터만 가져오기
 temp_df = float(temp_df[4] * 100000000)  # 지배주주지분 데이터에서 4번째 열(최근년도 지배주주지분)에 있는 값 가져오기 + 억단위 반영 + 실수화
 
-# 2) 예상 ROE : eROE
+### 2) 예상 ROE : eROE
 
 eROE = fr_tables[11]  # fnguide - 기업정보 - Snapshot - Financial Highlight 표에 도착! (11번째 테이블 가져오기. '전체'가 아닌 '연간'이므로)
 eROE = eROE.set_index(eROE.columns[0])  # 표의 첫째 열을 인덱스로 설정 (원래는 0부터 시작되는 숫자 인덱스)
