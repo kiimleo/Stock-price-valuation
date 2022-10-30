@@ -55,7 +55,7 @@ TS = int(TS[0].replace(',',''))  # 천단위 콤마 기호 지우고 정수형�
 
 TRS = fr_tables[4]  # fnguide - 기업정보 - Snapshot - 주주구분 현황 표에 도착! (4번째 테이블 가져오기)
 TRS = TRS.set_index(TRS.columns[0])  # 표의 첫째 열을 인덱스로 설정 (원래는 0부터 시작되는 숫자 인덱스)
-TRS = TRS.loc['자기주식 (자사주+자사주신탁)']  # 표에서 자기주식 행 데이터만 가져오기
+TRS = TRS.loc['자기주식 (자사주+자사주신탁)']  # 표에서 자기주식 행 데이터만 가져오기 todo 여기서 에러발생
 TRS = TRS[1]
 # TRS = np.array(TRS, dtype=np.float16)    # 해당 값이 NaN이면 0으로 바꿔주는...?1 뭔가 이상함. 나중에 다시!!!
 # np.nan_to_num(TRS, copy=False)           # 해당 값이 NaN이면 0으로 바꿔주는...?2 뭔가 이상함. 나중에 다시!!!
